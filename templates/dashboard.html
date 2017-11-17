@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, inital-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="/static/dashboard.css">
+
+		<title>Dashboard</title>
+
+		<div id="menu">
+			<ul>
+				<li><a href="#">Temperature</a></li>
+				<li><a href="dashboard">Humidity</a></li>
+				</u>
+		</div>
+	</head>
+
+	<body>
+		<table border=1>
+			<tr> 
+				<th> Temperature </th>
+				<th> Humidity </th>
+				<th> Time </th>
+			</tr>
+			{% for t in temp %}
+			<tr>
+				<td>{{ t[0] }}</td>
+			</tr>
+		{% endfor %}
+		</table>
+
+		
+	</body>
+	
+</html>
+
