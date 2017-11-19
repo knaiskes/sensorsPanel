@@ -38,8 +38,10 @@ def dashboard():
 	if not session.get("logged_in"):
 		return redirect(url_for("login"))
 	else:
-		temp = g.db.execute("SELECT temperature FROM measurements").fetchall()
-		return render_template("dashboard.html", temp = temp)
+		time=g.db.execute("SELECT timestamp FROM kiriakos2").fetchall()
+		temp=g.db.execute("SELECT temperature FROM kiriakos2").fetchall()
+		hum=g.db.execute("SELECT humidity FROM kiriakos2").fetchall()
+		return render_template("dashboard.html",time=time,temp=temp,hum=hum)
 
 """
 @app.route("/temp")
