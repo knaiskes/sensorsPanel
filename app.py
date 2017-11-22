@@ -1,6 +1,6 @@
 from flask import Flask, render_template,redirect,request,url_for,session,g
 from databases.database import *
-#from databases.measurements import *
+from databases.measurements import *
 import sys
 import sqlite3
 
@@ -38,15 +38,27 @@ def dashboard():
 	if not session.get("logged_in"):
 		return redirect(url_for("login"))
 	else:
-		temp = g.db.execute("SELECT temperature FROM measurements").fetchall()
-		return render_template("dashboard.html", temp = temp)
+		current_table = getCurrentTable()
+		time=g.db.execute("SELECT timestamp FROM "+current_table).fetchall()
+		temp=g.db.execute("SELECT temperature FROM "+current_table).fetchall()
+		hum=g.db.execute("SELECT humidity FROM "+current_table).fetchall()
+		return render_template("dashboard.html",time=time,temp=temp,hum=hum)
 
-"""
-@app.route("/temp")
-def temp():
-	temp = g.db.execute("SELECT temperature FROM measurements").fetchall()
-	return render_template("temp.html", temp = temp)
-"""
+@app.route("/history", methods=["GET", "POST"])
+def history():
+	option = request.form.get("options-form")
+	tables = getAllTables()
+
+	return render_template("history.html",tables=tables)
+
+@app.route("/display_history", methods=["GET", "POST"])
+def display_history():
+	option = request.form.get("options-form")
+	time=g.db.execute("SELECT timestamp FROM "+option).fetchall()
+	temp=g.db.execute("SELECT temperature FROM "+option).fetchall()	
+	hum=g.db.execute("SELECT humidity FROM "+option).fetchall()    	
+
+	return render_template("display_history.html",time=time,temp=temp,hum=hum)
 
 if __name__ == "__main__":
 	app.run(debug=True, host="0.0.0.0")

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, inital-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="/static/history.css">
+
+		<title>History</title>
+
+		<div id="menu">
+			<ul>
+				<li><a href="dashboard">Current</a></li>
+				<li><a href="history">Histrory</a></li>
+			</u>
+		</div>
+	</head>
+
+	<body>
+		<form method="POST" action="{{ url_for('display_history') }}">
+			<select name="options-form">
+				{% for t in tables %}
+				<option value="{{t}}">{{t}}</option>
+				{% endfor %}
+			</select>
+			<button type="submit"> Confirm </button>
+		</form>
+
+	</body>
+	
+</html>
+
