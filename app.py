@@ -44,6 +44,12 @@ def dashboard():
 		hum=g.db.execute("SELECT humidity FROM "+current_table).fetchall()
 		return render_template("dashboard.html",time=time,temp=temp,hum=hum)
 
+@app.route("/history")
+def history():
+	#option = request.form.get("options-form")
+	tables = getAllTables()
+
+	return render_template("history.html",tables=tables)
 
 if __name__ == "__main__":
 	app.run(debug=True, host="0.0.0.0")

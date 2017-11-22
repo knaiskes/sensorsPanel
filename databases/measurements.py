@@ -37,15 +37,30 @@ def getAllTables():
 	db = conn.cursor()
 	db.execute("SELECT * FROM sqlite_master WHERE TYPE = 'table'")
 	for name in db:
-		#print(name[1])
+		print(name[1])
 		av_tables.append(name[1])
 	conn.commit()
 	conn.close()
 	return av_tables
 
 def getCurrentTable():
+	latest_table = []
+	conn = sqlite3.connect(database)
+	db = conn.cursor()
+	db.execute("SELECT * FROM sqlite_master WHERE TYPE = 'table'")
+	for name in db:
+		latest_table.append(name[1])
+	conn.commit()
+	conn.close()
+	return latest_table[-1]
+		
+
+
+"""
+def getCurrentTable():
 	table = getAllTables()
 	return table[-1]
+"""
 	
 if os.path.exists(database) == False:
 	createDB()
