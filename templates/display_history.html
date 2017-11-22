@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, inital-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="/static/dashboard.css">
+
+		<title>Dashboard</title>
+
+		<div id="menu">
+			<ul>
+				<li><a href="dashboard">Current</a></li>
+				<li><a href="history">Histroy</a></li>
+				</u>
+		</div>
+	</head>
+
+	<body>
+		<center> <h3> <i> History </i> </h3> </center>
+
+		<div id="table-pos">
+		<table>
+
+			<tr>
+				<th> Time </th>
+				{% for ti in time%}
+				<td> {{ti[0]}} </td>
+				{% endfor %}
+			</tr>
+
+			<tr>
+				<th> Temperature </th>
+				{% for t in temp%}
+				<td> {{t[0]}} </td>
+				{% endfor %}
+			</tr>
+
+			<tr>
+				<th> Humidity </th>
+				{% for h in hum%}
+				<td> {{h[0]}} </td>
+				{% endfor %}
+			</tr>
+		</table>
+		</div>
+	</body>
+	
+</html>
+

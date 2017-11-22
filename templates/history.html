@@ -15,7 +15,7 @@
 	</head>
 
 	<body>
-		<form method="POST" action="{{ url_for('history') }}">
+		<form method="POST" action="{{ url_for('display_history') }}">
 			<select name="options-form">
 				{% for t in tables %}
 				<option value="{{t}}">{{t}}</option>
