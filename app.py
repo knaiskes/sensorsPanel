@@ -1,6 +1,6 @@
 from flask import Flask, render_template,redirect,request,url_for,session,g
 from databases.database import *
-#from databases.measurements import *
+from databases.measurements import *
 import sys
 import sqlite3
 
@@ -38,17 +38,12 @@ def dashboard():
 	if not session.get("logged_in"):
 		return redirect(url_for("login"))
 	else:
-		time=g.db.execute("SELECT timestamp FROM kiriakos2").fetchall()
-		temp=g.db.execute("SELECT temperature FROM kiriakos2").fetchall()
-		hum=g.db.execute("SELECT humidity FROM kiriakos2").fetchall()
+		current_table = getCurrentTable()
+		time=g.db.execute("SELECT timestamp FROM "+current_table).fetchall()
+		temp=g.db.execute("SELECT temperature FROM "+current_table).fetchall()
+		hum=g.db.execute("SELECT humidity FROM "+current_table).fetchall()
 		return render_template("dashboard.html",time=time,temp=temp,hum=hum)
 
-"""
-@app.route("/temp")
-def temp():
-	temp = g.db.execute("SELECT temperature FROM measurements").fetchall()
-	return render_template("temp.html", temp = temp)
-"""
 
 if __name__ == "__main__":
 	app.run(debug=True, host="0.0.0.0")
