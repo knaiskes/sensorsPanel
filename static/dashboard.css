@@ -62,11 +62,12 @@ table {
 }
 
 table td {
-	color:red;
-	background-color:#1C241C;
+	color: #509496;
+	background-color: #27282D;
 }
 table th {
-	background-color:#2A3827;
+	color: #D63D0A;
+	background-color: #333333;
 }
 
 #table-pos {
