@@ -7,7 +7,7 @@ import sqlite3
 app = Flask(__name__)
 
 app.secret_key = "secret_key"
-
+tables = getAllTables()
 @app.before_request
 def before_request():
 	g.db = sqlite3.connect("databases/measurements.db")
@@ -47,7 +47,7 @@ def dashboard():
 @app.route("/history", methods=["GET", "POST"])
 def history():
 	option = request.form.get("options-form")
-	tables = getAllTables()
+	#tables = getAllTables()
 
 	return render_template("history.html",tables=tables)
 
