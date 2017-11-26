@@ -3,6 +3,6 @@ from config import wifiConnect
 from photoResistor import photo_resistor
 
 while True:
-	wifiConnect("danger-zone", "D3bianGnu0001lichessORG")
+	wifiConnect("", "")
 	#temp_hum()
 	photo_resistor()
