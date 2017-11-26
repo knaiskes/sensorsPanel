@@ -1,7 +1,7 @@
 import paho.mqtt.client as mqtt
 from databases.measurements import *
+import multiprocessing
 
-# import from db file
 
 def on_connect(client, userdata, flags, rc):
 	print("Connected with result code {0}".format(rc))
@@ -12,15 +12,30 @@ def on_message(client, userdata, msg):
 	print("{0}*C {1}%".format(t,h))
 	addMesurements(t, h)
 
-#	conn = sqlite3.connect(database)
-#	db = conn.cursor()
-#	db.execute("INSERT INTO users VALUES(?,?,?)",(None, t, h))
-#	conn.commit()
-#	db.close()
+def photoResistor_connect(client, userdata, flags, rc):
+	print("Photo Resistor connected with result code {0}".format(rc))
+	client.subscribe("photoSensor")
+
+def photoResistor_message(client, userdata, msg):
+	#value = [int(x) for x in msg.payload.decode("utf-8")]
+	value = msg.payload.decode("utf-8")
+	print("light: ",value)
+
 
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 client.connect("localhost", 1883, 60)
 
-client.loop_forever()
+photo_clinet = mqtt.Client()
+photo_clinet.on_connect = photoResistor_connect
+photo_clinet.on_message = photoResistor_message
+photo_clinet.connect("localhost", 1883, 60)
+
+#client.loop_forever()
+#photo_clinet.loop_forever()
+
+while True:
+	client.loop_start()
+	photo_clinet.loop_start()
+
