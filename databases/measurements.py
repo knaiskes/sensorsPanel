@@ -37,7 +37,7 @@ def getAllTables():
 	db = conn.cursor()
 	db.execute("SELECT * FROM sqlite_master WHERE TYPE = 'table'")
 	for name in db:
-		print(name[1])
+		#print(name[1])
 		av_tables.append(name[1])
 	conn.commit()
 	conn.close()

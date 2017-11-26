@@ -42,7 +42,12 @@ def dashboard():
 		time=g.db.execute("SELECT timestamp FROM "+current_table).fetchall()
 		temp=g.db.execute("SELECT temperature FROM "+current_table).fetchall()
 		hum=g.db.execute("SELECT humidity FROM "+current_table).fetchall()
-		return render_template("dashboard.html",time=time,temp=temp,hum=hum)
+
+		with open("light_status.txt","r") as rfile:
+			light = rfile.readline()
+			light = int(light)
+			#print("LIGHT: ",light)
+		return render_template("dashboard.html",time=time,temp=temp,hum=hum,light=light)
 
 @app.route("/history", methods=["GET", "POST"])
 def history():

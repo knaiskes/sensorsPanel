@@ -17,6 +17,12 @@ def photoResistor_connect(client, userdata, flags, rc):
 def photoResistor_message(client, userdata, msg):
 	#value = [int(x) for x in msg.payload.decode("utf-8")]
 	value = msg.payload.decode("utf-8")
+	if value >= 300:
+		status = "1"
+	else:
+		status = "0"
+	with open("light_status.txt","w") as sfile:
+		sfile.write(status)
 	print("light: ",value)
 
 
