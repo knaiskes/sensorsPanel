@@ -1,7 +1,5 @@
 import paho.mqtt.client as mqtt
 from databases.measurements import *
-import multiprocessing
-
 
 def on_connect(client, userdata, flags, rc):
 	print("Connected with result code {0}".format(rc))
