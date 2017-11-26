@@ -5,7 +5,7 @@ from time import sleep
 from dht import DHT22
 
 # MQTT
-SERVER = "192.168.2.3" # Raspberry Pi
+SERVER = "192.168.2.3" # Raspberry Pi with static IP address 
 CLIENT_ID = "esp_dht22_sensor"
 TOPIC = b"tempSensor"
 

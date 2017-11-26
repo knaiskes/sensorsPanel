@@ -42,6 +42,13 @@
 			</tr>
 		</table>
 		</div>
+		<center>
+			{% if light == 1 %}
+			<h4>The status of light is high</h4>
+			{% elif light == 0 %}
+			<h4>The status of light is low</h4>
+			{% endif %}
+		</center>
 	</body>
 	
 </html>

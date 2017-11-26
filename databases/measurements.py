@@ -37,7 +37,7 @@ def getAllTables():
 	db = conn.cursor()
 	db.execute("SELECT * FROM sqlite_master WHERE TYPE = 'table'")
 	for name in db:
-		print(name[1])
+		#print(name[1])
 		av_tables.append(name[1])
 	conn.commit()
 	conn.close()
@@ -54,13 +54,21 @@ def getCurrentTable():
 	conn.close()
 	return latest_table[-1]
 		
+def getAverage(operation,table):
+	sumUp =0
+	length = 0
+	conn = sqlite3.connect(database)
+	db = conn.cursor()
+	db.execute("SELECT "+operation +" FROM "+table)
+	for v in db:
+		num = v[0]
+		num = float(num)
+		sumUp = sumUp + num
+		length = length + 1
+	sumUp = sumUp / length
+	conn.commit()
+	db.close()
+	return round(sumUp,2)
 
-
-"""
-def getCurrentTable():
-	table = getAllTables()
-	return table[-1]
-"""
-	
 if os.path.exists(database) == False:
 	createDB()
