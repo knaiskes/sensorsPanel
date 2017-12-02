@@ -18,6 +18,7 @@ def photoResistor_connect(client, userdata, flags, rc):
 def photoResistor_message(client, userdata, msg):
 	#value = [int(x) for x in msg.payload.decode("utf-8")]
 	value = msg.payload.decode("utf-8")
+	value = int(value)
 	if value >= 300:
 		status = "1"
 	else:
@@ -32,6 +33,7 @@ def motion_connect(client, userdata, flags, rc):
 
 def motion_message(client, userdata, msg):
 	value = msg.payload.decode("utf-8")
+	print(value)
 	if value == "motion":
 		run("go run sendmail/*.go", shell=True)
 
